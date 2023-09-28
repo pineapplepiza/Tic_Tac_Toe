@@ -5,8 +5,8 @@ const gameboard = (() => {
     "O","X","O",
     "X","O","X"]
 
-    // Trying to make a class function thing.
-    const player = function (turn, score, icon) {
+    // Player function thing.
+    const player = function(turn, score, icon) {
         return{
             turn: turn,
             score: score,
@@ -14,26 +14,32 @@ const gameboard = (() => {
         };
     };
 
-    // Trying to make objects for each player.
+    // Objects for each player.
     const p1 = player(true, 0, "X")
     const p2 = player(false, 0, "O")
+    
 
+    // Initialize a boolean flag
+    let isPlayer1Turn = true;
 
-    const moves = 0;
-
-    // Maybe make a function and return p1 and p2?
-    if (moves / 2 == 0){
-        p1 = true
-        p2 = false
-    } else {
-        p2 = true
-        p1 = false
+    // Function to Toggle the Flag
+    function togglePlauerTurn() {
+        isPlayer1Turn = !isPlayer1Turn
     }
 
-    const gameFlow = {
-
+    // Using Flag in Game Logic
+    function makeMove(cell){
+        if (isPlayer1Turn) {
+            // Player 1's turn
+            cell.textContent = "X";
+        } else {
+            // Player 2's turn
+            cell.textContent = "O";
+        }
+        // After making a move, toggle the turn for next move
+        togglePlauerTurn();
     }
-
 
 })
+
 
