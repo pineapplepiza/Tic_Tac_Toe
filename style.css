@@ -1,0 +1,32 @@
+
+body {
+    background-color: rgb(79, 79, 79);
+    /* max-height: 100%; */
+}
+
+/* #gameboard {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+} */
+
+.game-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 5px;
+    width: 300px; /* Maybe 600px is better if I'm going to use the gameboard png */
+    height: 300px;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    background-color: rgba(7, 10, 222, 0.281);
+    border: 1px solid #480a0a;
+    text-align: center;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+
+

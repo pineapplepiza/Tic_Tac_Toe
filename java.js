@@ -17,7 +17,7 @@ const gameboard = (() => {
     // Objects for each player.
     const p1 = player(true, 0, "X")
     const p2 = player(false, 0, "O")
-    
+
 
     // Initialize a boolean flag
     let isPlayer1Turn = true;
@@ -27,18 +27,33 @@ const gameboard = (() => {
         isPlayer1Turn = !isPlayer1Turn
     }
 
+    const cells = document.querySelectorAll('.cell');
+
     // Using Flag in Game Logic
-    function makeMove(cell){
-        if (isPlayer1Turn) {
-            // Player 1's turn
-            cell.textContent = "X";
-        } else {
-            // Player 2's turn
-            cell.textContent = "O";
-        }
+    function makeMove(cell, index){
+        // Determine who's turn it is
+        const currentPlayer = isPlayer1Turn ? X : 0
+
+        cell.textContent = currentPlayer
+
+        // Check for a win or a draw and handle game logic
+
         // After making a move, toggle the turn for next move
         togglePlauerTurn();
     }
+
+    cells.forEach((cell, index) => {
+        cell.addEventListener('click', () => {
+            // Check if the cell is already occupied before making a move
+            if (!cell.textContent) {
+                makeMove(cell, index) // Implement your move logic here
+            };
+        });
+    });
+
+
+
+
 
 })
 
