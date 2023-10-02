@@ -1,9 +1,6 @@
 const gameboard = (() => {
 
-    const board = 
-    ["X","O","X",
-    "O","X","O",
-    "X","O","X"]
+    const gameBoard = ["", "", "", "", "", "", "", "", ""]
 
     // Player function thing.
     const player = function(turn, score, icon) {
@@ -23,23 +20,49 @@ const gameboard = (() => {
     let isPlayer1Turn = true;
 
     // Function to Toggle the Flag
-    function togglePlauerTurn() {
+    function togglePlayerTurn() {
         isPlayer1Turn = !isPlayer1Turn
     }
 
     const cells = document.querySelectorAll('.cell');
 
+
+    function checkWin(currentPlayer){
+        if (
+            checkRowWin(currentPlayer)
+        ) {
+            console.log('Player ${currentPlayer} wins!')
+        }
+    }
+
+    // Check for a win or a draw and handle game logic
+    // First 3 horizontal rows, 3 vertical rows, 2 diagonal rows.
+    function checkRowWin(player) {
+        return (
+            (gameBoard[0] === player && gameBoard[1] === player && gameBoard[2] === player) ||
+            (gameBoard[3] === player && gameBoard[4] === player && gameBoard[5] === player) ||
+            (gameBoard[6] === player && gameBoard[7] === player && gameBoard[8] === player) ||
+            (gameBoard[0] === player && gameBoard[3] === player && gameBoard[6] === player) ||
+            (gameBoard[1] === player && gameBoard[4] === player && gameBoard[7] === player) ||
+            (gameBoard[2] === player && gameBoard[5] === player && gameBoard[8] === player) ||
+            (gameBoard[0] === player && gameBoard[4] === player && gameBoard[8] === player) ||
+            (gameBoard[6] === player && gameBoard[4] === player && gameBoard[2] === player)
+        );
+    }
+
     // Using Flag in Game Logic
     function makeMove(cell, index){
         // Determine who's turn it is
-        const currentPlayer = isPlayer1Turn ? X : 0
+        const currentPlayer = isPlayer1Turn ? "X" : "O"
 
         cell.textContent = currentPlayer
 
-        // Check for a win or a draw and handle game logic
+        // Updating the cell on the array
+        gameboard[index] = currentPlayer;
+        
 
         // After making a move, toggle the turn for next move
-        togglePlauerTurn();
+        togglePlayerTurn();
     }
 
     cells.forEach((cell, index) => {
@@ -50,11 +73,6 @@ const gameboard = (() => {
             };
         });
     });
-
-
-
-
-
-})
+})();
 
 
