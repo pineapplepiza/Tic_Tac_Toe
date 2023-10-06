@@ -26,13 +26,34 @@ const gameboard = (() => {
 
     const cells = document.querySelectorAll('.cell');
 
+    const scoreBoardP1 = document.querySelector("#p1")
+    const scoreBoardP2 = document.querySelector('#p2');
 
     function checkWin(currentPlayer){
-        if (
-            checkRowWin(currentPlayer)
-        ) {
-            console.log('Player ${currentPlayer} wins!')
+
+        // If 3 in a row do this;
+        if (checkRowWin(currentPlayer) ) {
+
+            // Figuring out which player got 3 in a row
+            const p = currentPlayer == 'X' ? p1 : p2 
+            
+            // Updating player score
+            p.score ++
+
+            // Updating the scoreboard text content
+            if (p == p1) {
+                scoreBoardP1.textContent = `P1: ${p.score}`
+            } else {
+                scoreBoardP2.textContent = `P1: ${p.score}`
+            }
+
+            boardReset();
         }
+    }
+
+    // Making a function to reset the board not the game.
+    function boardReset(){
+        gameBoard = ["", "", "", "", "", "", "", "", ""]
     }
 
     // Check for a win or a draw and handle game logic
@@ -55,11 +76,12 @@ const gameboard = (() => {
         // Determine who's turn it is
         const currentPlayer = isPlayer1Turn ? "X" : "O"
 
+        // Update the gameboard array and cell content
+        gameBoard[index] = currentPlayer;
         cell.textContent = currentPlayer
-
-        // Updating the cell on the array
-        gameboard[index] = currentPlayer;
         
+        
+        checkWin(currentPlayer)
 
         // After making a move, toggle the turn for next move
         togglePlayerTurn();
