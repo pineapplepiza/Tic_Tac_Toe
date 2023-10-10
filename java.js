@@ -1,6 +1,6 @@
 const gameboard = (() => {
 
-    const gameBoard = ["", "", "", "", "", "", "", "", ""]
+    let gameBoard = ["", "", "", "", "", "", "", "", ""]
 
     // Player function thing.
     const player = function(turn, score, icon) {
@@ -53,7 +53,16 @@ const gameboard = (() => {
 
     // Making a function to reset the board not the game.
     function boardReset(){
-        gameBoard = ["", "", "", "", "", "", "", "", ""]
+
+        cells.forEach(cell => {
+            cell.textContent = ""
+        })
+
+        isPlayer1Turn = true; // Reset the player turn, assuming player 1 starts
+        
+        gameBoard = Array(9).fill(""); // Reset the gameboard array
+
+        // gameBoard = ["", "", "", "", "", "", "", "", ""];
     }
 
     // Check for a win or a draw and handle game logic
