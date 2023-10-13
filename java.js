@@ -29,7 +29,7 @@ const gameboard = (() => {
     const scoreBoardP1 = document.querySelector("#p1")
     const scoreBoardP2 = document.querySelector('#p2');
 
-    function checkWin(currentPlayer){
+    function checkDrawWin(currentPlayer){
 
         // If 3 in a row do this;
         if (checkRowWin(currentPlayer) ) {
@@ -48,7 +48,13 @@ const gameboard = (() => {
             }
 
             boardReset();
+        
+        // Checking if there's a draw after concluding no 3 in a row.
+        } else if(gameBoard.includes("") == false){
+            boardReset()
         }
+
+
     }
 
     // Making a function to reset the board not the game.
@@ -80,6 +86,16 @@ const gameboard = (() => {
         );
     }
 
+    // MAYBE MAKE A FUNCTION TO CHECK FOR DRAW?
+
+    // Reset board if the cells are filled up and there's no win (DRAW)
+    /* function checkDraw(){
+        if ((gameBoard.includes("") == false) && (checkRowWin() == false)) {
+            boardReset()
+        }
+    }*/
+
+
     // Using Flag in Game Logic
     function makeMove(cell, index){
         // Determine who's turn it is
@@ -90,7 +106,7 @@ const gameboard = (() => {
         cell.textContent = currentPlayer
         
         
-        checkWin(currentPlayer)
+        checkDrawWin(currentPlayer)
 
         // After making a move, toggle the turn for next move
         togglePlayerTurn();
