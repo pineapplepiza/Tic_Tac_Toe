@@ -15,6 +15,7 @@ const gameboard = (() => {
     const p1 = player(true, 0, "X")
     const p2 = player(false, 0, "O")
 
+    let ties = 0
 
     // Initialize a boolean flag
     let isPlayer1Turn = true;
@@ -28,6 +29,8 @@ const gameboard = (() => {
 
     const scoreBoardP1 = document.querySelector("#p1")
     const scoreBoardP2 = document.querySelector('#p2');
+
+    const tiesCount = document.querySelector('#ties');
 
     function checkDrawWin(currentPlayer){
 
@@ -51,6 +54,8 @@ const gameboard = (() => {
         
         // Checking if there's a draw after concluding no 3 in a row.
         } else if(gameBoard.includes("") == false){
+            ties++
+            tiesCount.textContent = `Ties: ${ties}`
             boardReset()
         }
 
@@ -71,7 +76,7 @@ const gameboard = (() => {
         // gameBoard = ["", "", "", "", "", "", "", "", ""];
     }
 
-    // Check for a win or a draw and handle game logic
+    // Check for a win handle game logic
     // First 3 horizontal rows, 3 vertical rows, 2 diagonal rows.
     function checkRowWin(player) {
         return (
