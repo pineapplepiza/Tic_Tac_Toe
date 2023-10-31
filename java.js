@@ -50,9 +50,35 @@ const gameboard = (() => {
                 scoreBoardP2.textContent = `Player O: ${p.score}`
             }
 
-            /* boardReset(); */ // Temporary comment out
+            winningCellsIndices = checkRowWin(currentPlayer)
 
-            winningCellsIndices.forEach(index => {
+            if (winningCellsIndices) {
+                // Highlight the winning cells with animation
+                const winningCells = document.querySelectorAll('.cell'); // Replace with actual selector
+                winningCells.forEach(cell => {
+
+                    const cellIndex = parseInt(cell.id.split('-')[1])
+
+                    if (winningCellsIndices.includes(cellIndex) && gameBoard[cellIndex] === currentPlayer) {
+                        cell.classList.add('winning-cell'); // Add a class for styling
+                        cell.classList.add('winning-animation') 
+                    }
+                });
+    
+                // Apply the animation to each winning cell
+                winningCells.forEach(cell => {
+                    cell.classList.add('winning-animation'); // Add the CSS class with the animation
+                });
+    
+                // Remove the animation class when the animation ends
+                winningCells.forEach(cell => {
+                    cell.addEventListener('animationend', () => {
+                        cell.classList.remove('winning-animation');
+                    });
+                });
+                
+            
+            /* winningCellsIndices.forEach(index => {
                 const winningCell = document.getElementById(`cell-${index}`); // Replace with your cell identifier
                 winningCell.classList.add('winning-cell'); // Add a class for styling
             });
@@ -69,9 +95,9 @@ const gameboard = (() => {
                 cell.addEventListener('animationend', () => {
                 cell.classList.remove('winning-animation');
                 });
-            });
+            }); */
   
-
+            boardReset(); // Temporary comment out
         
         // Checking if there's a draw after concluding no 3 in a row.
         } else if(gameBoard.includes("") == false){
@@ -97,6 +123,10 @@ const gameboard = (() => {
         // gameBoard = ["", "", "", "", "", "", "", "", ""];
     }
 
+    //
+    let winningCellsIndices; // Declare it in a higher scope
+    //
+
     // Check for a win handle game logic
     // First 3 horizontal rows, 3 vertical rows, 2 diagonal rows.
     function checkRowWin(player) {
@@ -106,7 +136,7 @@ const gameboard = (() => {
             const [a, b, c] = combination;
             if (gameBoard[a] === player && gameBoard[b] === player && gameBoard[c] === player) {
               // Store the indices of the winning cells
-              const winningCellsIndices = combination;
+              winningCellsIndices = combination;
               return winningCellsIndices;
             }
         }

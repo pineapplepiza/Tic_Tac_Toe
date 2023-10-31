@@ -52,8 +52,24 @@ body {
     background-color: red;
 }
 
+/* @keyframes winning-animation {
+    0% { background-color: yellow; }
+    50% { background-color: gold; }
+    100% { background-color: yellow; }
+    
+} */
+
 @keyframes winning-animation {
     0% { background-color: yellow; }
     50% { background-color: gold; }
     100% { background-color: yellow; }
+    
 }
+
+.winning-cell.winning-animation {
+    animation-name: winning-animation; /* Your animation name */
+    animation-duration: 0.5s; /* Change this to make the animation last longer (e.g., 2 seconds) */
+    /* Add other animation properties as needed */
+}
+
+
