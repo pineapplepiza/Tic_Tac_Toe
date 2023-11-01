@@ -59,12 +59,28 @@ body {
     
 } */
 
-@keyframes winning-animation {
+/* @keyframes winning-animation {
     0% { background-color: yellow; }
     50% { background-color: gold; }
     100% { background-color: yellow; }
-    
+} */
+
+@keyframes winning-animation {
+    0% {
+        background-color: white;
+        color: black;
+    }
+    50% {
+        background-color: black;
+        color: black; /* Keep text color constant */
+    }
+    100% {
+        background-color: white;
+        color: black;
+    }
 }
+
+
 
 .winning-cell.winning-animation {
     animation-name: winning-animation; /* Your animation name */

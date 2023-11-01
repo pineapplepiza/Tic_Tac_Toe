@@ -17,6 +17,8 @@ const gameboard = (() => {
 
     let ties = 0
 
+    let winningCellsIndices; // Declare it in a higher scope
+
     // Initialize a boolean flag
     let isPlayer1Turn = true;
 
@@ -54,7 +56,7 @@ const gameboard = (() => {
 
             if (winningCellsIndices) {
                 // Highlight the winning cells with animation
-                const winningCells = document.querySelectorAll('.cell'); // Replace with actual selector
+                const winningCells = document.querySelectorAll('.cell'); // Not just winning cells but it selects all cells
                 winningCells.forEach(cell => {
 
                     const cellIndex = parseInt(cell.id.split('-')[1])
@@ -64,40 +66,19 @@ const gameboard = (() => {
                         cell.classList.add('winning-animation') 
                     }
                 });
-    
-                // Apply the animation to each winning cell
-                winningCells.forEach(cell => {
-                    cell.classList.add('winning-animation'); // Add the CSS class with the animation
-                });
-    
-                // Remove the animation class when the animation ends
-                winningCells.forEach(cell => {
-                    cell.addEventListener('animationend', () => {
+
+                // Listen for the animationend event on any cell (since they should finish at the same time)
+                cells[0].addEventListener('animationend', () => {
+                    // Remove the animation class from all cells
+                    cells.forEach(cell => {
                         cell.classList.remove('winning-animation');
-                    });
-                });
+                    })
+
+                    // After animation ends, reset the board
+                    boardReset();
+                })
                 
-            
-            /* winningCellsIndices.forEach(index => {
-                const winningCell = document.getElementById(`cell-${index}`); // Replace with your cell identifier
-                winningCell.classList.add('winning-cell'); // Add a class for styling
-            });
-
-            const winningCells = document.querySelectorAll('.winning-cell'); // Replace with actual selector
-
-            // Apply the animation to each winning cell
-            winningCells.forEach(cell => {
-            cell.classList.add('winning-animation'); // Add the CSS class with the animation
-            });
-
-            // Remove the animation class when the animation ends
-            winningCells.forEach(cell => {
-                cell.addEventListener('animationend', () => {
-                cell.classList.remove('winning-animation');
-                });
-            }); */
-  
-            boardReset(); // Temporary comment out
+            } 
         
         // Checking if there's a draw after concluding no 3 in a row.
         } else if(gameBoard.includes("") == false){
@@ -106,6 +87,8 @@ const gameboard = (() => {
             boardReset()
         }
 
+
+        
 
     }
 
@@ -118,14 +101,9 @@ const gameboard = (() => {
 
         isPlayer1Turn = true; // Reset the player turn, assuming player 1 starts
 
-        gameBoard = Array(9).fill(""); // Reset the gameboard array
-
-        // gameBoard = ["", "", "", "", "", "", "", "", ""];
+        gameBoard = Array(9).fill(""); // Aka; gameBoard = ["", "", "", "", "", "", "", "", ""];
     }
 
-    //
-    let winningCellsIndices; // Declare it in a higher scope
-    //
 
     // Check for a win handle game logic
     // First 3 horizontal rows, 3 vertical rows, 2 diagonal rows.
@@ -141,17 +119,6 @@ const gameboard = (() => {
             }
         }
         return null; // No win
-
-        /* return (
-            (gameBoard[0] === player && gameBoard[1] === player && gameBoard[2] === player) ||
-            (gameBoard[3] === player && gameBoard[4] === player && gameBoard[5] === player) ||
-            (gameBoard[6] === player && gameBoard[7] === player && gameBoard[8] === player) ||
-            (gameBoard[0] === player && gameBoard[3] === player && gameBoard[6] === player) ||
-            (gameBoard[1] === player && gameBoard[4] === player && gameBoard[7] === player) ||
-            (gameBoard[2] === player && gameBoard[5] === player && gameBoard[8] === player) ||
-            (gameBoard[0] === player && gameBoard[4] === player && gameBoard[8] === player) ||
-            (gameBoard[6] === player && gameBoard[4] === player && gameBoard[2] === player)
-        ); */
     }
 
 
@@ -162,14 +129,6 @@ const gameboard = (() => {
     [0, 4, 8], [2, 4, 6] // Diagonals
     ];
 
-    // MAYBE MAKE A FUNCTION TO CHECK FOR DRAW?
-
-    // Reset board if the cells are filled up and there's no win (DRAW)
-    /* function checkDraw(){
-        if ((gameBoard.includes("") == false) && (checkRowWin() == false)) {
-            boardReset()
-        }
-    }*/
 
 
     // Using Flag in Game Logic
@@ -206,6 +165,77 @@ const gameboard = (() => {
             };
         });
     });
+    
 })();
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+// Inside checkRowWin() function
+/* return (
+            (gameBoard[0] === player && gameBoard[1] === player && gameBoard[2] === player) ||
+            (gameBoard[3] === player && gameBoard[4] === player && gameBoard[5] === player) ||
+            (gameBoard[6] === player && gameBoard[7] === player && gameBoard[8] === player) ||
+            (gameBoard[0] === player && gameBoard[3] === player && gameBoard[6] === player) ||
+            (gameBoard[1] === player && gameBoard[4] === player && gameBoard[7] === player) ||
+            (gameBoard[2] === player && gameBoard[5] === player && gameBoard[8] === player) ||
+            (gameBoard[0] === player && gameBoard[4] === player && gameBoard[8] === player) ||
+            (gameBoard[6] === player && gameBoard[4] === player && gameBoard[2] === player)
+        ); */
+
+
+// MAYBE MAKE A FUNCTION TO CHECK FOR DRAW?
+
+    // Reset board if the cells are filled up and there's no win (DRAW)
+    /* function checkDraw(){
+        if ((gameBoard.includes("") == false) && (checkRowWin() == false)) {
+            boardReset()
+        }
+    }*/
+
+// Inside of checkRowWin
+
+/* winningCellsIndices.forEach(index => {
+                const winningCell = document.getElementById(`cell-${index}`); // Replace with your cell identifier
+                winningCell.classList.add('winning-cell'); // Add a class for styling
+            });
+
+            const winningCells = document.querySelectorAll('.winning-cell'); // Replace with actual selector
+
+            // Apply the animation to each winning cell
+            winningCells.forEach(cell => {
+            cell.classList.add('winning-animation'); // Add the CSS class with the animation
+            });
+
+            // Remove the animation class when the animation ends
+            winningCells.forEach(cell => {
+                cell.addEventListener('animationend', () => {
+                cell.classList.remove('winning-animation');
+                });
+            }); */
+
+
+// Inside of if(winningIndices)
+
+ /* // Remove the animation class when the animation ends
+                winningCells.forEach(cell => {
+                    cell.addEventListener('animationend', () => {
+                        cell.classList.remove('winning-animation');
+                    });
+
+                });
+
+                boardReset(); */
