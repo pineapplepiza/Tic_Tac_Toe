@@ -63,11 +63,19 @@ const gameboard = (() => {
 
                     if (winningCellsIndices.includes(cellIndex) && gameBoard[cellIndex] === currentPlayer) {
                         cell.classList.add('winning-cell'); // Add a class for styling
-                        cell.classList.add('winning-animation') 
+                        cell.classList.add('winning-animation')
+                        
+                        //---------------------------------
+                        // Listen for the animationend event on this individual cell
+                        cell.addEventListener('animationend', () => {
+                            // Remove the animation class from this cell
+                            cell.classList.remove('winning-animation')
+                            boardReset()
+                        })
                     }
                 });
 
-                // Listen for the animationend event on any cell (since they should finish at the same time)
+                /* // Listen for the animationend event on any cell (since they should finish at the same time)
                 cells[0].addEventListener('animationend', () => {
                     // Remove the animation class from all cells
                     cells.forEach(cell => {
@@ -76,7 +84,8 @@ const gameboard = (() => {
 
                     // After animation ends, reset the board
                     boardReset();
-                })
+                }) */
+
                 
             } 
         
