@@ -52,6 +52,16 @@ body {
     background-color: red;
 }
 
+
+#resetBtn{
+    margin: 70px;
+}
+
+
+
+/* ANIMATION BELOW ---------------------------------------------------------------------------------------------------------------------------------- */
+
+
 /* @keyframes winning-animation {
     0% { background-color: yellow; }
     50% { background-color: gold; }

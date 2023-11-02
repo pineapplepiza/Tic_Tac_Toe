@@ -75,18 +75,6 @@ const gameboard = (() => {
                     }
                 });
 
-                /* // Listen for the animationend event on any cell (since they should finish at the same time)
-                cells[0].addEventListener('animationend', () => {
-                    // Remove the animation class from all cells
-                    cells.forEach(cell => {
-                        cell.classList.remove('winning-animation');
-                    })
-
-                    // After animation ends, reset the board
-                    boardReset();
-                }) */
-
-                
             } 
         
         // Checking if there's a draw after concluding no 3 in a row.
@@ -95,8 +83,6 @@ const gameboard = (() => {
             tiesCount.textContent = `Ties: ${ties}`
             boardReset()
         }
-
-
         
 
     }
@@ -114,11 +100,26 @@ const gameboard = (() => {
     }
 
 
+    const resetBtn = document.querySelector('#resetBtn');
+    resetBtn.addEventListener('click', () => {
+
+        boardReset();
+
+        p1.score = 0;
+        p2.score = 0;
+
+        scoreBoardP1.textContent = `Player O: ${p1.score}`;
+        scoreBoardP2.textContent = `Player O: ${p2.score}`;
+
+        ties = 0
+        tiesCount.textContent = `Ties: ${ties}`
+    })
+
+
     // Check for a win handle game logic
     // First 3 horizontal rows, 3 vertical rows, 2 diagonal rows.
     function checkRowWin(player) {
 
-        // Added all this
         for (const combination of winningCombinations) {
             const [a, b, c] = combination;
             if (gameBoard[a] === player && gameBoard[b] === player && gameBoard[c] === player) {
@@ -248,3 +249,15 @@ const gameboard = (() => {
                 });
 
                 boardReset(); */
+
+
+/* // Listen for the animationend event on any cell (since they should finish at the same time)
+                cells[0].addEventListener('animationend', () => {
+                    // Remove the animation class from all cells
+                    cells.forEach(cell => {
+                        cell.classList.remove('winning-animation');
+                    })
+
+                    // After animation ends, reset the board
+                    boardReset();
+                }) */
