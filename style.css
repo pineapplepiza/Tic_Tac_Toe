@@ -1,13 +1,16 @@
 
 body {
-    background-color: rgb(180, 52, 167);
-    /* max-height: 100%; */
+    --background-color: rgb(180, 52, 167);
+    --text-color: black;
     align-items: center;
     display: flex;
     flex-direction: column;
 }
 
-
+body.dark {
+    --background-color: rgb(58, 16, 53);
+    --text-color: white;
+}
 
 #game-container {
     display: grid;
@@ -22,8 +25,8 @@ body {
 .cell {
     width: 100px;
     height: 100px;
-    background-color: rgba(7, 10, 222, 0.281);
-    border: 1px solid #480a0a;
+    --background-color: rgba(7, 10, 222, 0.281);
+    --border: 1px solid #480a0a;
     text-align: center;
     font-size: 24px;
     cursor: pointer;
@@ -32,6 +35,12 @@ body {
     justify-content: center;
     display: flex;
 }
+
+.cell.dark{
+    --background-color: rgb(6, 32, 98);
+    --border: 1px solid rgb(252, 248, 248);
+}
+
 
 #display{
     display: flex;

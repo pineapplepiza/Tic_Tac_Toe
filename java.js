@@ -179,7 +179,10 @@ const gameboard = (() => {
 })();
 
 
-
+document.querySelector('#darkLight').addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    document.cell.classList.toggle('dark');
+})
 
 
 
