@@ -1,14 +1,18 @@
 
 body {
-    --background-color: rgb(180, 52, 167);
+    --background-color: rgb(215, 23, 196);
     --text-color: black;
+
+    background-color: var(--background-color);
+    color: var(--text-color);
+
     align-items: center;
     display: flex;
     flex-direction: column;
 }
 
 body.dark {
-    --background-color: rgb(58, 16, 53);
+    --background-color: rgb(86, 41, 111);
     --text-color: white;
 }
 
@@ -23,10 +27,15 @@ body.dark {
 }
 
 .cell {
+    --background-color-c: rgba(253, 253, 253, 0.281);
+    --border-color: #480a0a;
+
+    background-color: var(--background-color-c);
+    border-color: var(--border-color);
+    
+    border: 1px solid ;
     width: 100px;
     height: 100px;
-    --background-color: rgba(7, 10, 222, 0.281);
-    --border: 1px solid #480a0a;
     text-align: center;
     font-size: 24px;
     cursor: pointer;
@@ -37,8 +46,21 @@ body.dark {
 }
 
 .cell.dark{
-    --background-color: rgb(6, 32, 98);
-    --border: 1px solid rgb(252, 248, 248);
+    --background-color-c: rgb(6, 32, 98);
+    --border-color: rgb(199, 255, 15);
+}
+
+.btmBtn{
+    --border-color-b: black;
+
+    border-color: var(--border-color-b);
+    border: 1px solid;
+    border-radius: 5px;
+    background-color: rgb(71, 97, 190);
+}
+
+.btmBtn.dark{
+    --border-color-b: white;
 }
 
 
@@ -51,6 +73,19 @@ body.dark {
 .player, #ties{
     margin: 8px;
     padding: 8px;
+
+}
+
+.player{
+    --border-color-p: black;
+    
+    border-color: var(--border-color-p);
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+.player.dark{
+    --border-color-p: white;
 }
 
 #p1{
@@ -58,7 +93,7 @@ body.dark {
 }
 
 #p2{
-    background-color: red;
+    background-color: rgb(255, 0, 0);
 }
 
 

@@ -182,6 +182,8 @@ const gameboard = (() => {
 document.querySelector('#darkLight').addEventListener('click', () => {
     document.body.classList.toggle('dark');
     document.cell.classList.toggle('dark');
+    document.player.classList.toggle('dark');
+    document.btmBtn.classList.toggle('dark')
 })
 
 
